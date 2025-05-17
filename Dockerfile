@@ -1,3 +1,11 @@
-FROM php:8.2-apache
-COPY index.php /var/www/html/
-RUN docker-php-ext-install mysqli
+# Usamos la imagen oficial de PHP con Apache como base
+FROM php:7.4-apache
+
+# Copiamos el código fuente a la carpeta raíz del servidor web
+COPY . /var/www/html/
+
+# Exponemos el puerto 80 para que el contenedor escuche peticiones HTTP
+EXPOSE 80
+
+# Comando para arrancar Apache en primer plano
+CMD ["apache2-foreground"]

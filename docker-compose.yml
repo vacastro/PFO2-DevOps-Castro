@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"   # Mapeamos el puerto 8080 del host al 80 del contenedor (Apache)
+    networks:
+      - proyectoweb
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: clave123   # Contraseña root para MySQL
+    ports:
+      - "3306:3306"
+    networks:
+      - proyectoweb
+
+networks:
+  proyectoweb:
+    driver: bridge
